@@ -67,7 +67,8 @@ RUN apt-get update \
     && find /var/cache/apt/archives /var/lib/apt/lists -not -name lock -type f -delete \
     && find /var/cache -type f -delete
 
-ENTRYPOINT ["/app/tools.sh"]
+# ENTRYPOINT ["/app/tools.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "--" , "while true; do sleep 30; done;"]
 
 ### Light, CLI only
 FROM base AS light
@@ -76,7 +77,8 @@ COPY --from=build /app/full/llama-cli /app
 
 WORKDIR /app
 
-ENTRYPOINT [ "/app/llama-cli" ]
+# ENTRYPOINT [ "/app/llama-cli" ]
+ENTRYPOINT ["/bin/sh", "-c", "--" , "while true; do sleep 30; done;"]
 
 ### Server, Server only
 FROM base AS server
@@ -90,5 +92,4 @@ WORKDIR /app
 HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080/health" ]
 
 # ENTRYPOINT [ "/app/llama-server" ]
-
 ENTRYPOINT ["/bin/sh", "-c", "--" , "while true; do sleep 30; done;"]
