@@ -89,4 +89,6 @@ WORKDIR /app
 
 HEALTHCHECK CMD [ "curl", "-f", "http://localhost:8080/health" ]
 
-ENTRYPOINT [ "/app/llama-server" ]
+# ENTRYPOINT [ "/app/llama-server" ]
+
+ENTRYPOINT ["/bin/sh", "-c", "--" , "while true; do sleep 30; done;"]
